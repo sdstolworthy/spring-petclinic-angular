@@ -26,6 +26,8 @@ exports.config = {
     },
   ],
 
+  directConnect: true,
+
   // jasmineNodeOpts: {
   //   showColors: true,
   //   defaultTimeoutInterval: 30000,
