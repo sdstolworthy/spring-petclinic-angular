@@ -13,7 +13,7 @@ exports.config = {
   },
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
-  seleniumAddress: "http://selenium-hub:4444/wd/hub",
+  seleniumAddress: process.env.SELENIUM_ADDRESS,
   cucumberOpts: {
     require: "features/step_definitions/*.ts",
     format: "json:.tmp/results.json",
