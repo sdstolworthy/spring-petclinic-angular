@@ -13,7 +13,6 @@ exports.config = {
   },
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
-  directConnect: true,
   seleniumAddress: process.env.SELENIUM_ADDRESS,
   cucumberOpts: {
     require: "features/step_definitions/*.ts",
