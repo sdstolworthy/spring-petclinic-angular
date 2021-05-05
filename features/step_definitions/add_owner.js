@@ -78,6 +78,7 @@ BeforeAll(async () => {
 After(async () => {
   return new Promise((resolve) => setTimeout(resolve, 4000));
 });
+Before(() => browser.waitForAngularEnabled(true));
 
 When("I type in {word} for First Name", async function (word) {
   // const name = element(by.id("firstName"));
