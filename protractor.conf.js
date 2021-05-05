@@ -1,8 +1,6 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require("jasmine-spec-reporter");
-
 exports.config = {
   allScriptsTimeout: 11000,
   // specs: ["./e2e/**/*.e2e-spec.ts"],
@@ -10,11 +8,24 @@ exports.config = {
   baseUrl: "http://localhost:4200/",
   capabilities: {
     browserName: "chrome",
+    maxInstances: 1,
+    chromeOptions: {
+      args: [
+        "--headless",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-browser-side-navigation",
+        "--disable-setuid-sandbox",
+        "--disable-gpu",
+        "--ignore-certificate-errors",
+        "--ignore-ssl-errors",
+        "--disable-infobars=true",
+      ],
+    },
   },
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
-  seleniumAddress:
-    process.env.SELENIUM_ADDRESS,
+  seleniumAddress: process.env.SELENIUM_ADDRESS,
   // directConnect: true,
   cucumberOpts: {
     require: "features/step_definitions/*.ts",
@@ -23,11 +34,13 @@ exports.config = {
   plugins: [
     {
       package: "protractor-simple-cucumber-html-reporter-plugin",
-   
-    options:{automaticallyGenerateReport: true,
-      removeExistingJsonReportFile: true} }
-  ],
 
+      options: {
+        automaticallyGenerateReport: true,
+        removeExistingJsonReportFile: true,
+      },
+    },
+  ],
 
   // jasmineNodeOpts: {
   //   showColors: true,
