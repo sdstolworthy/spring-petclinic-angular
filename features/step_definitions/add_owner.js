@@ -32,12 +32,10 @@ When("I click on the back button", async function () {
 Then(
   "I expect to go back to the page with a table of owners info",
   async function () {
-    // await browser.waitForAngularEnabled(true);
     // const currentUrl = await browser.getCurrentUrl();
     // expect(currentUrl).to.equal(`${browser.baseUrl}petclinic/owners`);
   }
 );
-
 Given("I am on the add owner page", async function () {
   await browser.get(`/petclinic/owners/add`);
 });
@@ -53,7 +51,7 @@ Given("The input for Telephone is not a series of numbers", async function () {
 When("I try to click on Add Owner", async function () {
   await browser.waitForAngularEnabled(true);
   const addOwnerButton = element(by.cssContainingText(".btn", "Add Owner"));
-  addOwnerButton.click();
+  await addOwnerButton.click();
 });
 
 Then("I expect the Add Owner button to not be clickable", async function () {
