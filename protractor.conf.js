@@ -10,6 +10,7 @@ exports.config = {
   baseUrl: "http://localhost:4200/",
   capabilities: {
     browserName: "chrome",
+    maxInstances: 1,
   },
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
