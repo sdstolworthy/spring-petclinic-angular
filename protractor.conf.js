@@ -16,9 +16,6 @@ exports.config = {
   seleniumAddress: process.env.SELENIUM_ADDRESS,
   cucumberOpts: {
     require: "features/step_definitions/*.ts",
-
-  directConnect:true,
-
     format: "json:.tmp/results.json",
   },
   plugins: [
