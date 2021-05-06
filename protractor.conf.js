@@ -44,6 +44,9 @@ exports.config = {
   },
   plugins: [
     {
+      package: "protractor-multiple-cucumber-html-reporter-plugin",
+    },
+    {
       package: "protractor-simple-cucumber-html-reporter-plugin",
 
       options: {
