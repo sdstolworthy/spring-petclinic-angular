@@ -6,27 +6,33 @@ exports.config = {
   // specs: ["./e2e/**/*.e2e-spec.ts"],
   specs: ["features/**/*.feature"],
   baseUrl: "http://localhost:4200/",
+  highlightDelay: 1000,
+  directConnect: false,
+  directConnect: false,
   multiCapabilities: [
-    {
-      browserName: "firefox",
-    },
-    {
-      browserName: "MicrosoftEdge",
-    },
-    {
-      browserName: "opera",
-    },
+    // {
+    //   browserName: "firefox",
+    // },
+    // {
+    //   browserName: "MicrosoftEdge",
+    // },
+    // {
+    //   browserName: "opera",
+    // },
     {
       browserName: "chrome",
       maxInstances: 1,
+
       chromeOptions: {
         args: [
+          /** TO SEE TESTS RUN, COMMENT --headless */
           "--headless",
           "--no-sandbox",
           "--disable-dev-shm-usage",
           "--disable-browser-side-navigation",
           "--disable-setuid-sandbox",
           "--disable-gpu",
+          "--window-size=1280x720",
           "--ignore-certificate-errors",
           "--ignore-ssl-errors",
           "--disable-infobars=true",

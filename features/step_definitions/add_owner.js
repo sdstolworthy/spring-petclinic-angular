@@ -32,8 +32,8 @@ When("I click on the back button", async function () {
 Then(
   "I expect to go back to the page with a table of owners info",
   async function () {
-    // const currentUrl = await browser.getCurrentUrl();
-    // expect(currentUrl).to.equal(`${browser.baseUrl}petclinic/owners`);
+    const currentUrl = await browser.getCurrentUrl();
+    expect(currentUrl).to.equal(`${browser.baseUrl}petclinic/owners`);
   }
 );
 Given("I am on the add owner page", async function () {
@@ -81,33 +81,33 @@ After(async () => {
 Before(() => browser.waitForAngularEnabled(true));
 
 When("I type in {word} for First Name", async function (word) {
-  // const name = element(by.id("firstName"));
-  // name.sendKeys(word);
-  // expect(name).not.to.be.undefined;
+  const name = element(by.id("firstName"));
+  name.sendKeys(word);
+  expect(name).not.to.be.undefined;
 });
 
-// When("I type in {word} for Last Name", async function (word) {
-//   await browser.waitForAngularEnabled(true);
-//   const name = element(by.id("lastName"));
-//   name.sendKeys(word);
-//   expect(name).not.to.be.undefined;
-// });
+When("I type in {word} for Last Name", async function (word) {
+  await browser.waitForAngularEnabled(true);
+  const name = element(by.id("lastName"));
+  name.sendKeys(word);
+  expect(name).not.to.be.undefined;
+});
 
-// When("I select {word} from the Type dropdown", async function (word) {
-//   await browser.waitForAngularEnabled(true);
-//   element(by.cssContainingText("option", word)).click();
-// });
+When("I select {word} from the Type dropdown", async function (word) {
+  await browser.waitForAngularEnabled(true);
+  element(by.cssContainingText("option", word)).click();
+});
 
-// Then("I should be able to click Save Vet", async function () {
-//   await browser.waitForAngularEnabled(true);
-//   expect(element(by.cssContainingText(".btn", "Save Vet")).click());
-// });
+Then("I should be able to click Save Vet", async function () {
+  await browser.waitForAngularEnabled(true);
+  expect(element(by.cssContainingText(".btn", "Save Vet")).click());
+});
 
-// Then(
-//   "I should see {string} added to the list of veterinarians",
-//   async function (string) {
-//     await browser.waitForAngularEnabled(true);
-//     expect(element(by.cssContainingText(".td", string)).isPresent()).not.to.be
-//       .undefined;
-//   }
-// );
+Then(
+  "I should see {string} added to the list of veterinarians",
+  async function (string) {
+    await browser.waitForAngularEnabled(true);
+    expect(element(by.cssContainingText(".td", string)).isPresent()).not.to.be
+      .undefined;
+  }
+);
