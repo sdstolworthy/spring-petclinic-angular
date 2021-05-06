@@ -6,23 +6,34 @@ exports.config = {
   // specs: ["./e2e/**/*.e2e-spec.ts"],
   specs: ["features/**/*.feature"],
   baseUrl: "http://localhost:4200/",
-  capabilities: {
-    browserName: "chrome",
-    maxInstances: 1,
-    chromeOptions: {
-      args: [
-        "--headless",
-        "--no-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-browser-side-navigation",
-        "--disable-setuid-sandbox",
-        "--disable-gpu",
-        "--ignore-certificate-errors",
-        "--ignore-ssl-errors",
-        "--disable-infobars=true",
-      ],
+  multiCapabilities: [
+    {
+      browserName: "firefox",
     },
-  },
+    {
+      browserName: "MicrosoftEdge",
+    },
+    {
+      browserName: "opera",
+    },
+    {
+      browserName: "chrome",
+      maxInstances: 1,
+      chromeOptions: {
+        args: [
+          "--headless",
+          "--no-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-browser-side-navigation",
+          "--disable-setuid-sandbox",
+          "--disable-gpu",
+          "--ignore-certificate-errors",
+          "--ignore-ssl-errors",
+          "--disable-infobars=true",
+        ],
+      },
+    },
+  ],
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
   seleniumAddress: process.env.SELENIUM_ADDRESS,
@@ -32,6 +43,9 @@ exports.config = {
     format: "json:.tmp/results.json",
   },
   plugins: [
+    {
+      package: "protractor-multiple-cucumber-html-reporter-plugin",
+    },
     {
       package: "protractor-simple-cucumber-html-reporter-plugin",
 
