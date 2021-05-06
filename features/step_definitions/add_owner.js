@@ -81,6 +81,7 @@ After(async () => {
 Before(() => browser.waitForAngularEnabled(true));
 
 When("I type in {word} for First Name", async function (word) {
+  takeScreenshot(this, browser, "first_name");
   const name = element(by.id("firstName"));
   name.sendKeys(word);
   expect(name).not.to.be.undefined;
