@@ -36,8 +36,8 @@ exports.config = {
   ],
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
-  seleniumAddress: process.env.SELENIUM_ADDRESS,
-  // directConnect: true,
+  // seleniumAddress: process.env.SELENIUM_ADDRESS,
+  directConnect: true,
   cucumberOpts: {
     require: "features/step_definitions/*.ts",
     format: "json:.tmp/results.json",

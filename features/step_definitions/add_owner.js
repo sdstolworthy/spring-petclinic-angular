@@ -1,6 +1,5 @@
 const chai = require("chai");
 var expect = chai.expect;
-var eventually = chai.eventually;
 // var chaiAsPromised = require('chai-as-promised');
 // import { Given } from "@cucumber/cucumber";
 const { takeScreenshot } = require("../common/take_screenshot");
@@ -9,7 +8,6 @@ const {
   Then,
   When,
   BeforeAll,
-  AfterStep,
   After,
   Before,
   setDefaultTimeout,
@@ -22,7 +20,7 @@ Given("I am on the page to add a new owner", async function () {
   // http://localhost:4200/petclinic/owners/add
   await browser.waitForAngularEnabled(true);
   await browser.get(`/petclinic/owners/add`);
-  takeScreenshot(browser, "pet_clinic_screen");
+  await takeScreenshot(this, browser, "pet_clinic_screen");
 });
 
 When("I click on the back button", async function () {
