@@ -12,7 +12,7 @@ function ensureDirectoryExists(path) {
  * @param {string} filename
  * @returns {Promise<string>}
  */
-async function takeScreenshot(world, browser, filename) {
+async function takeScreenshot(world, browser, filename = "test") {
   const screenshot = await browser.driver.takeScreenshot();
   const dir = ".tmp/screenshots/";
   ensureDirectoryExists(dir);

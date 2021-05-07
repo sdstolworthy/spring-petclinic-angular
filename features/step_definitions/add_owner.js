@@ -68,38 +68,40 @@ Before(async () => browser.waitForAngularEnabled(false));
 
 Given("I am on the Add New Veterinarian page", async function () {
   await browser.get(`/petclinic/vets/add`);
-  await takeScreenshot(this, browser, "add_new_vet");
-});
-When("I type in Wuxin for First Name", async function () {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
-  const name = await element(by.id("firstName"));
-  name.sendKeys("Wuxin");
-  expect(name).not.to.be.undefined;
-  await takeScreenshot(this, browser, "first_name_after");
+  await takeScreenshot(this, browser, "pet_page");
 });
 
-When("I type in Zeng for Last Name", async function () {
+When("I type in {word} for First Name", async function (word) {
+  const name = element(by.id("firstName"));
+  await name.sendKeys(word);
+  expect(name).not.to.be.undefined;
+  await takeScreenshot(this, browser);
+});
+
+When("I type in {word} for Last Name", async function (word) {
   const name = element(by.id("lastName"));
-  await name.sendKeys("Zeng");
+  await name.sendKeys(word);
   expect(name).not.to.be.undefined;
-  await takeScreenshot(this, browser, "last_name");
+  await takeScreenshot(this, browser);
 });
 
-When("I select radiology from the Type dropdown", async function () {
-  element(by.cssContainingText("option", "radiology")).click();
-  await takeScreenshot(this, browser, "specialty");
+When("I select {word} from the Type dropdown", async function (word) {
+  await element(by.cssContainingText("option", word)).click();
+  await takeScreenshot(this, browser);
 });
 
 Then("I should be able to click Save Vet", async function () {
-  element(by.cssContainingText(".btn", "Save Vet")).click();
-  await takeScreenshot(this, browser, "save_vet");
+  expect(element(by.cssContainingText(".btn", "Save Vet")).click());
+  const currentUrl = await browser.getCurrentUrl();
+  expect(currentUrl).to.equal(`${browser.baseUrl}petclinic/vets`);
+  await takeScreenshot(this, browser);
 });
 
 Then(
-  "I should see Wuxin Zeng added to the list of veterinarians",
-  async function () {
-    expect(element(by.cssContainingText(".td", "Wuxin Zeng")).isPresent()).not
-      .to.be.undefined;
-    await takeScreenshot(this, browser, "see_name_in_table");
+  "I should see {string} added to the list of veterinarians",
+  async function (string) {
+    expect(element(by.cssContainingText(".td", string)).isPresent()).not.to.be
+      .undefined;
+    await takeScreenshot(this, browser);
   }
 );
