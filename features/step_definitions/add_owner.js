@@ -38,6 +38,7 @@ Then(
 );
 Given("I am on the add owner page", async function () {
   await browser.get(`/petclinic/owners/add`);
+  await takeScreenshot(this, browser, "pet_clinic_add_owner_screen");
 });
 
 Given("The input for Telephone is not a series of numbers", async function () {
@@ -46,7 +47,7 @@ Given("The input for Telephone is not a series of numbers", async function () {
   const telephone = element(by.id("telephone"));
   telephone.sendKeys("asdf");
   expect(telephone).not.to.be.undefined;
-  takeScreenshot(this, browser, "telephone not numbers");
+  await takeScreenshot(this, browser, "non_numeric_telephone");
 });
 
 When("I try to click on Add Owner", async function () {
@@ -62,7 +63,7 @@ Then("I expect the Add Owner button to not be clickable", async function () {
       "disabled"
     )
   ).equals("true");
-  takeScreenshot(this, browser, "add_owner_disabled");
+  await takeScreenshot(this, browser, "disabled_button");
 });
 
 setDefaultTimeout(100000);
@@ -72,7 +73,6 @@ BeforeAll(async () => {
 After(async () => {
   return new Promise((resolve) => setTimeout(resolve, 4000));
 });
-// Before(() => browser.waitForAngularEnabled(true));
 Before(async () => browser.get("/"));
 
 Given("I am on the Add New Veterinarian page", async function () {
