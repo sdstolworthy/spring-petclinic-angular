@@ -46,6 +46,7 @@ Given("The input for Telephone is not a series of numbers", async function () {
   const telephone = element(by.id("telephone"));
   telephone.sendKeys("asdf");
   expect(telephone).not.to.be.undefined;
+  takeScreenshot(this, browser, "telephone not numbers");
 });
 
 When("I try to click on Add Owner", async function () {
@@ -61,54 +62,55 @@ Then("I expect the Add Owner button to not be clickable", async function () {
       "disabled"
     )
   ).equals("true");
+  takeScreenshot(this, browser, "add_owner_disabled");
 });
 
 setDefaultTimeout(100000);
-Given("I am on the Add New Veterinarian page", async function () {
-  // Write code here that turns the phrase above into concrete actions
-  try {
-    await browser.get(`/petclinic/vets/add`, 100000);
-  } catch (e) {
-    await browser.get("/", 100000);
-  }
-});
 BeforeAll(async () => {
   return new Promise((resolve) => setTimeout(resolve, 4000));
 });
 After(async () => {
   return new Promise((resolve) => setTimeout(resolve, 4000));
 });
-Before(() => browser.waitForAngularEnabled(true));
+// Before(() => browser.waitForAngularEnabled(true));
+Before(async () => browser.get("/"));
 
-When("I type in {word} for First Name", async function (word) {
+Given("I am on the Add New Veterinarian page", async function () {
+  await browser.get(`/petclinic/vets/add`);
+  takeScreenshot(this, browser, "add_new_vet");
+});
+When("I type in Wuxin for First Name", async function () {
   takeScreenshot(this, browser, "first_name");
-  const name = element(by.id("firstName"));
-  name.sendKeys(word);
+  await new Promise((resolve) => setTimeout(resolve, 4000));
+  const name = await element(by.xpath('//*[@id="firstName"]'));
+  name.sendKeys("Wuxin");
   expect(name).not.to.be.undefined;
+  takeScreenshot(this, browser, "first_name_after");
 });
 
-When("I type in {word} for Last Name", async function (word) {
-  await browser.waitForAngularEnabled(true);
+When("I type in Zeng for Last Name", async function () {
   const name = element(by.id("lastName"));
-  name.sendKeys(word);
+  await name.sendKeys("Zeng");
   expect(name).not.to.be.undefined;
+  takeScreenshot(this, browser, "last_name");
 });
 
-When("I select {word} from the Type dropdown", async function (word) {
-  await browser.waitForAngularEnabled(true);
-  element(by.cssContainingText("option", word)).click();
+When("I select radiology from the Type dropdown", async function () {
+  element(by.cssContainingText("option", "radiology")).click();
+  takeScreenshot(this, browser, "specialty");
 });
 
 Then("I should be able to click Save Vet", async function () {
-  await browser.waitForAngularEnabled(true);
   expect(element(by.cssContainingText(".btn", "Save Vet")).click());
+  takeScreenshot(this, browser, "save_vet");
 });
 
 Then(
-  "I should see {string} added to the list of veterinarians",
-  async function (string) {
+  "I should see Wuxin Zeng added to the list of veterinarians",
+  async function () {
     await browser.waitForAngularEnabled(true);
-    expect(element(by.cssContainingText(".td", string)).isPresent()).not.to.be
-      .undefined;
+    expect(element(by.cssContainingText(".td", "Wuxin Zeng")).isPresent()).not
+      .to.be.undefined;
+    takeScreenshot(this, browser, "see_name_in_table");
   }
 );
