@@ -25,7 +25,7 @@ exports.config = {
       chromeOptions: {
         args: [
           /** TO SEE TESTS RUN, COMMENT --headless */
-          // "--headless",
+          "--headless",
           "--no-sandbox",
           "--disable-dev-shm-usage",
           "--disable-browser-side-navigation",
