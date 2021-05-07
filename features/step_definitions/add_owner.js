@@ -11,7 +11,6 @@ const {
   setDefaultTimeout,
 } = require("@cucumber/cucumber");
 const { browser, element } = require("protractor");
-const { protractor } = require("protractor/built/ptor");
 
 Given("I am on the page to add a new owner", async function () {
   await browser.get(`/petclinic/owners/add`);
@@ -27,7 +26,7 @@ Then(
   async function () {
     const currentUrl = await browser.getCurrentUrl();
     expect(currentUrl).to.equal(`${browser.baseUrl}petclinic/owners`);
-    takeScreenshot(this, browser, "table_of_owners");
+    await takeScreenshot(this, browser, "table_of_owners");
   }
 );
 Given("I am on the add owner page", async function () {
